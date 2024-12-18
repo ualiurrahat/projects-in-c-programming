@@ -1,32 +1,36 @@
 /*
-    
-    Author: MD.Ualiur Rahman Rahat.
+    Author: MD. Ualiur Rahman Rahat
 
+    Project: A Comprehensive and Interactive Calculator Using C
+
+    About the Project:
+    This project implements a simple yet versatile calculator capable of performing basic arithmetic operations such as addition, subtraction, multiplication, and division.
+    Additionally, it supports advanced features like finding remainders, calculating percentage values, and clearing all previous data. The program is interactive, allowing
+    continuous operations and updates the result dynamically, while handling invalid inputs gracefully. It is designed to provide an efficient and user-friendly experience.
 */
-//Project: Creating a simple calculator using C programming language.
-// About Project: here I am gonna make a simple calculator to perform addition, subtraction,
-// multiplication, division and finding remainders, getting percentages of a numbeer and many more.
 
-// header files....
+// Including necessary header files.
 #include <stdio.h>
 #include <stdlib.h>
 
-// var to store result after calculation.
+// Global variable to store the result after a calculation.
 double result = 0;
 
-// var to decide if one or two operands are needed as user input.
-// if k = 0, user have to input two operands.
-// if k is any positive value, then user needs to input only one operands.
+// Variable to determine if one or two operands are needed as user input.
+// If k = 0, the user needs to input two operands.
+// If k > 0, the user needs to input only one operand.
 int k = 0;
 
-// function to show menu option.
+// Function to display the menu options and return the user's choice.
 int menu()
 {
-    // var to store user's choice from menu option.
+    // Variable to store the user's choice.
     int choice;
 
     printf("\n\n    Result: %.2lf\n", result);
+    // at first, no calculation has been performed.So initial result is shown as 0.00.
     printf("\n");
+    // Showcasing all the features of our calculator.
     printf("1. Addition:\n");
     printf("2. Subtraction:\n");
     printf("3. Multiplication:\n");
@@ -42,25 +46,20 @@ int menu()
     return choice;
 }
 
-// function to perform addition
-
+// Function to perform addition.
 void addition()
 {
 
-    // var to store operands.
-    double a, b;
+    double a, b; // Variables to store operands.
 
-    // when k > 0, one operand is needed.
-    if (k)
+    if (k) // One operand is needed when k > 0.
     {
         printf("\nEnter a number: ");
         scanf("%lf", &a);
         result += a;
         printf("Result = %.2lf\n", result);
     }
-
-    //when k == 0, we need two operands.
-    else
+    else // Two operands are needed when k == 0.
     {
         printf("Enter two operands: ");
         scanf("%lf %lf", &a, &b);
@@ -68,32 +67,22 @@ void addition()
         printf("Result = %.2lf\n", result);
     }
 
-    // changing value of k after calculation.
-    // k is 1, cause we have 1 operand as result.
-    // so we need only 1 operands to perform any other operation.
-
-    k = 1;
+    k = 1; // Updating k to 1 since the result can now be used as an operand.
 }
 
-// function to perform subtraction.
-
+// Function to perform subtraction.
 void subtraction()
 {
+    double a, b; // Variables to store operands.
 
-    // var to store operands.
-    double a, b;
-
-    // when k > 0, one operand is needed.
-    if (k)
+    if (k) // One operand is needed when k > 0.
     {
         printf("\nEnter a number: ");
         scanf("%lf", &a);
         result -= a;
         printf("Result = %.2lf\n", result);
     }
-
-    //when k == 0, we need two operands.
-    else
+    else // Two operands are needed when k == 0.
     {
         printf("Enter two operands: ");
         scanf("%lf %lf", &a, &b);
@@ -101,32 +90,23 @@ void subtraction()
         printf("Result = %.2lf\n", result);
     }
 
-    // changing value of k after calculation.
-    // k is 1, cause we have 1 operand as result.
-    // so we need only 1 operands to perform any other operation.
-
-    k = 1;
+    k = 1; // Updating k to 1 since the result can now be used as an operand.
 }
 
-// function to perform multiplication.
-
+// Function to perform multiplication.
 void multiplication()
 {
 
-    // var to store operands.
-    double a, b;
+    double a, b; // Variables to store operands.
 
-    // when k > 0, one operand is needed.
-    if (k)
+    if (k) // One operand is needed when k > 0.
     {
         printf("\nEnter a number: ");
         scanf("%lf", &a);
         result *= a;
         printf("Result = %.2lf\n", result);
     }
-
-    //when k == 0, we need two operands.
-    else
+    else // Two operands are needed when k == 0.
     {
         printf("Enter two operands: ");
         scanf("%lf %lf", &a, &b);
@@ -134,30 +114,21 @@ void multiplication()
         printf("Result = %lf\n", result);
     }
 
-    // changing value of k after calculation.
-    // k is 1, cause we have 1 operand as result.
-    // so we need only 1 operands to perform any other operation.
-
-    k = 1;
+    k = 1; // Updating k to 1 since the result can now be used as an operand.
 }
 
-// function to perform division.
-
+// Function to perform division.
 void division()
 {
 
-    // var to store operands.
-    double a, b;
+    double a, b; // Variables to store operands.
 
-    // when k > 0, one operand is needed.
-    if (k)
+    if (k) // One operand is needed when k > 0.
     {
         printf("\nEnter a number: ");
         scanf("%lf", &a);
 
-        // showing error or infinity value if any number is divided by zero.
-        // if so, then var result is reset to zero to perform other operations.
-        if (a == 0)
+        if (a == 0) // Handling division by zero.
         {
             printf("Infinity!!\n");
             printf("Result reset to 0.\n");
@@ -172,13 +143,12 @@ void division()
         }
     }
 
-    //when k == 0, we need two operands.
-    else
+    else // Two operands are needed when k == 0.
     {
         printf("Enter two operands: ");
         scanf("%lf %lf", &a, &b);
 
-        if (b == 0)
+        if (b == 0) // Handling division by zero.
         {
             printf("Infinity!!\n");
             printf("Result reset to 0.\n");
@@ -194,28 +164,17 @@ void division()
         }
     }
 
-    // changing value of k after calculation.
-    // k is 1, cause we have 1 operand as result.
-    // so we need only 1 operands to perform any other operation.
-
-    k = 1;
+    k = 1; // Updating k to 1 since the result can now be used as an operand.
 }
 
-// function to perform remainder operation.
-
+// Function to calculate the remainder.
 void getRemainder()
 {
+    int a, b; // Integer operands for remainder operation.
 
-    // var to store operands.
-    int a, b;
+    int rem = (int)result; // Converting result to an integer.
 
-    // remainder can be found only for integer values.
-    // so taking a new var to store integer value of result var.
-
-    int rem = (int)result;
-
-    // when k > 0, one operand is needed.
-    if (k)
+    if (k) // One operand is needed when k > 0.
     {
         printf("Integer value of the result: %d\n", rem);
         printf("\nEnter a number: ");
@@ -226,8 +185,7 @@ void getRemainder()
         printf("Result = %.2lf\n", result);
     }
 
-    //when k == 0, we need two operands.
-    else
+    else // Two operands are needed when k == 0.
     {
         printf("Enter two operands: ");
         scanf("%d %d", &a, &b);
@@ -237,22 +195,14 @@ void getRemainder()
         printf("Result = %d\n", result);
     }
 
-    // changing value of k after calculation.
-    // k is 1, cause we have 1 operand as result.
-    // so we need only 1 operands to perform any other operation.
-
-    k = 1;
+    k = 1; // Updating k to 1 since the result can now be used as an operand.
 }
 
-// function to get percentage value of a number.
-
+// Function to calculate the percentage of a number.
 void getPercentage()
 {
-    double percent;
-    double number;
-    // k > 0, then there is already a number exist in the result var.
-    // we need to ask how many percentage of the number user wants to know.
-    if (k)
+    double percent, number;
+    if (k) // If k > 0, the result is used to calculate the percentage.
     {
         printf("Enter percentage: ");
         scanf("%lf", &percent);
@@ -260,8 +210,7 @@ void getPercentage()
         result = (result * percent) / 100;
         printf("Result = %.2lf\n", result);
     }
-    // when k == 0, we need a number and the percentage of the number we want to know.
-    else
+    else // If k == 0, the user provides both the number and the percentage.
     {
 
         printf("Enter a number: ");
@@ -273,6 +222,7 @@ void getPercentage()
         printf("Result = %.2lf\n", result);
     }
 }
+// Function to clear all stored data.
 void clearData()
 {
     k = 0;
@@ -284,12 +234,11 @@ void clearData()
 int main()
 {
     // showing name on the screen.
-    printf("                        ................Rahat Calculator...........\n\n");
-    //showing menu option to the user until chose to exit the program.
+    printf("                        ................Versatile Calculator...........\n\n");
 
-    while (1)
+    while (1) // Infinite loop to keep the calculator running until the user chooses to exit.
     {
-        switch (menu())
+        switch (menu()) // Handling user choice using a switch-case structure.
         {
         case 1:
             addition();
@@ -320,7 +269,7 @@ int main()
 
         case 8:
             printf("Thanks for using my software.\n");
-            //termination of the program.
+            // termination of the program.
             exit(0);
 
         default:
