@@ -1,9 +1,9 @@
-/*
-    Author: MD.Ualiur Rahman Rahat
-*/
 
-// Project: Snake-Gun-Water Game.
-/* Rules of the game:
+/*
+Author: MD.Ualiur Rahman Rahat
+ Project: Snake-Gun-Water Game.
+ Rules of the game:
+
     Game is played between a player(user) and computer(AI).
     Player has to choose between snake, gun or water.
     The AI  automatically chooses an option.
@@ -11,11 +11,6 @@
     If player chooses snake and AI chooses gun, then snake gets shot. So AI wins and vice versa.
     If you choose water and AI chooses gun, then gun gets sunk in the water. Player wins and vice versa.
     If both choose the same thing, match is drawn.
-
-*/
-
-/*
-    Code for the game.
 */
 
 // header files for the program.
@@ -23,59 +18,36 @@
 #include <stdlib.h>
 #include <time.h>
 
-// function to run the whole game.
+// function to determine the result of a round.
 int SnakeGunWater(char you, char computer)
 {
-    // this function will return an integer.
-    // Returns 1 if player wins. Returns -1 if player loses.
-    // Return -1 if match is drawn drawn.
+    // This function will return an integer:
+    // 1 if the player wins, -1 if the player loses, and 0 if the match is drawn.
 
-    //cases for match to be a draw:
-    //ss, ww, gg.
-
-    //logic when match is drawn.
-    if (you == computer)
+    if (you == computer) // Match is drawn.
     {
         return 0;
     }
 
-    // cases for win or lose.
-    //you vs computer: sw/ws, sg/gs, wg/gw.
-
+    // Win/Loss conditions based on the game rules:
     if (you == 's' && computer == 'w')
-    {
-        return 1; // player won
-    }
-
-    else if (you == 'w' && computer == 's')
-    {
-        return -1; // player lost
-    }
-
-    else if (you == 's' && computer == 'g')
-    {
-        return -1; // player lost.
-    }
-
-    else if (you == 'g' && computer == 's')
-    {
-        return 1; // player won;
-    }
-
-    else if (you == 'w' && computer == 'g')
-    {
-        return 1; // player won.
-    }
-
-    else if (you == 'g' && computer == 'w')
-    {
-        return -1; // player lost.
-    }
+        return 1; // Snake drinks water (player wins).
+    if (you == 'w' && computer == 's')
+        return -1; // Snake drinks water (AI wins).
+    if (you == 's' && computer == 'g')
+        return -1; // Snake gets shot (AI wins).
+    if (you == 'g' && computer == 's')
+        return 1; // Snake gets shot (player wins).
+    if (you == 'w' && computer == 'g')
+        return 1; // Gun sinks in water (player wins).
+    if (you == 'g' && computer == 'w')
+        return -1; // Gun sinks in water (AI wins).
 }
 
-int main()
+// Function to run the whole game loop.
+void play_game()
 {
-    // welcome screen.
+    // Welcome message.
     printf("................Welcome To Snake, Gun Or Water Game.............\n");
     printf("\n\n\n");
 
@@ -95,81 +67,88 @@ int main()
     // var to store player's and computer's input.
     char you, computer;
 
-    //var to count total round of play, and total no. of time player won.
+    // var to count total round of play, and total no. of times player won.
     int round = 0, win = 0;
 
-    // take players input and check input validation.
+    // Game loop to keep playing until the user chooses to exit.
     while (1)
     {
+        // Take the player's input.
+        printf("Enter s for snake, g for gun, w for water (0 to exit): ");
+        scanf(" %c", &you); // Space before %c is to handle the newline character from previous input.
 
-        printf("Enter s for snake, g for gun, w for water(0 to exit):");
-        scanf(" %c", &you);
         if (you == '0')
         {
-            break;
+            break; // Exit the game if the player enters '0'.
         }
-        //checking valid input.
+
+        // Input validation: checking for valid choices.
         while (you != 's' && you != 'g' && you != 'w')
         {
             printf("Invalid input\n");
-            printf("Enter s for snake, g for gun, w for water(0 to exit):");
-            scanf(" %c", &you); // space is given for the new line("\n") of the previous line of code.
+            printf("Enter s for snake, g for gun, w for water (0 to exit): ");
+            scanf(" %c", &you);
             if (you == '0')
             {
-                break;
+                break; // Exit if the player enters '0'.
             }
         }
+
+        if (you == '0')
+            break; // Exit if the player enters '0'.
+
         round++;
 
-        // code for computer's auto input.
-
+        // Generate the computer's random choice.
         int number;
-        srand(time(0));            // generates numbers in seconds and different numbers in each runtime.
-        number = rand() % 100 + 1; //  generate random numbers between 1 to 100;
+        srand(time(0));            // Random number generator based on current time.
+        number = rand() % 100 + 1; // Generate a random number between 1 and 100.
 
-        // computer's input selection.
-        //  computer chooses snake if number is between 0 to 33, gun when number is from 33 to 66 and water for number 66 to 100.
+        // Computer's input based on the random number.
         if (number <= 33)
         {
-            computer = 's';
+            computer = 's'; // 1 to 33 -> Snake.
         }
-
         else if (number > 33 && number <= 66)
         {
-            computer = 'g';
+            computer = 'g'; // 34 to 66 -> Gun.
         }
         else
         {
-            computer = 'w';
+            computer = 'w'; // 67 to 100 -> Water.
         }
 
-        // using the function to calculate the result.
+        // Calculate the result using the SnakeGunWater function.
         int result = SnakeGunWater(you, computer);
 
-        // result = 1 , you win. result = -1, you lose. result = 0, math drawn.
-
+        // Display the result.
         if (result == 1)
         {
-            win++;
+            win++; // Increment the win count if the player wins.
             printf("You chose '%c' and computer chose '%c'. You win!\n", you, computer);
-            printf("Congrats! Total Round:%d\t Total Win:%d\n", round, win);
         }
         else if (result == -1)
         {
             printf("You chose '%c' and computer chose '%c'. You lose!\n", you, computer);
-            printf("Total Round:%d\t Total Win:%d\n", round, win);
         }
-        else if (result == 0)
+        else
         {
-            printf("You and computer both enterd '%c' Match is drawn.\n", you);
-            printf("Total Round:%d\t Total Win:%d\n", round, win);
+            printf("You and computer both entered '%c'. Match is drawn.\n", you);
         }
+
+        // Display the stats.
+        printf("Total Rounds: %d\t Total Wins: %d\n", round, win);
         printf("\n\n");
     }
 
-    // Good-bye message.
+    // Goodbye message.
     printf("\n\n");
     printf("............Thanks For Playing The Game.............\n");
+}
 
+int main()
+{
+    // Call the play_game function to start the game.
+    play_game();
     return 0;
 }
