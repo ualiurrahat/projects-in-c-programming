@@ -1,14 +1,11 @@
 /*
     Author: MD. Ualiur Rahman Rahat
-
-*/
-
-/* Project Title: Digital Stop-watch using C programming.
+    Project Title: Digital Stop-watch using C programming.
     About Project: The stop-watch will start its countdown from 00:00:00 (hour:minute:sec)
     and it will stop at user's given time.
-    that's it.
-*/
 
+*/
+// Necessary Header files
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h> // header file for Sleep() function

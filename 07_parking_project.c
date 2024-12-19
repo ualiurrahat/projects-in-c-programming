@@ -1,42 +1,43 @@
 /*
- * Author: MD.Ualiur Rahman Rahat.
+ * Author: MD. Ualiur Rahman Rahat.
  *
+ * Project: Car Parking Maintenance Software
  */
 
-// project: A car parking maintenance software.
 /*
-    About Project:
-    private car, bus,bike,CNG,taxi can be parked there.
+ * About Project:
+ * This software manages a parking lot where the following vehicles can be parked:
+ * - Private cars
+ * - Buses
+ * - Bikes
+ * - CNGs
+ * - Taxis
+ *
+ * Payment Rates:
+ * - Private car/Taxi: $20
+ * - CNG: $10
+ * - Bus: $50
+ * - Bike: $5
+ *
+ * Functionality:
+ * - Calculates the total amount earned.
+ * - Tracks the total count of each type of vehicle.
+ * - Displays the maximum number of vehicles parked in each type.
+ */
 
-    Amount to pay per vehicle.....
-    private car/taxi = $20
-    CNG = $10
-    bus = $50
-    bike = $5
-
-    We have to calculate.....
-    total amount earned....
-    total count of transports.
-    maximum no. of vehicles can be parked in each type.
-
-    */
-
-// necessary header files for the program.
-
+// Required header files for input/output operations and utility functions.
 #include <stdio.h>
 #include <stdlib.h>
 
-// var for vehicles of each type, total number of vehicles, total amount of money earned.
+// Global variables for tracking vehicle counts, total vehicles, and total revenue.
+int no_of_bus = 0;              // Number of buses parked.
+int no_of_private_car_taxi = 0; // Number of private cars/taxis parked.
+int no_of_cng = 0;              // Number of CNGs parked.
+int no_of_bike = 0;             // Number of bikes parked.
+int count = 0;                  // Total number of vehicles parked.
+int amount = 0;                 // Total revenue earned.
 
-int no_of_bus = 0;
-int no_of_private_car_taxi = 0;
-int no_of_cng = 0;
-int no_of_bike = 0;
-int count = 0;
-int amount = 0;
-
-//function for menu screen.
-
+// Function to display the main menu and get user input for actions.
 int menu()
 {
     int choice;
@@ -46,17 +47,15 @@ int menu()
     printf("3. Enter CNG: \n");
     printf("4. Enter Bike: \n");
     printf("5. Show Status: \n");
-    printf("6. Delete Data: \n\n\n");
+    printf("6. Delete Data: \n");
     printf("7. Exit from the program.\n");
     printf("Enter your choice: ");
     scanf("%d", &choice);
     return choice;
 }
 
-// function for showing data.
-//will show total number of vehicles parked in each item.
-//total vehicle parked of all type.
-//total amount earned.
+// Function to display the current parking status.
+// Displays counts of all vehicle types, total vehicles parked, and total revenue earned.
 void showData()
 {
     printf("\n\n......Please Wait....\n");
@@ -70,8 +69,8 @@ void showData()
     printf("\n\n\n");
 }
 
-//function for deleting data
-//will erase all the data saved before.
+// Function to delete all data.
+// Resets the counts and revenue to zero.
 void deleteData()
 {
     printf("............Loading...........\n");
@@ -83,54 +82,57 @@ void deleteData()
     amount = 0;
     count = 0;
 }
-// function for private car / taxi.
+
+// Function to handle the entry of private cars or taxis.
+// Increments the count and adds $20 to the total revenue.
 void private_car_taxi()
 {
     printf("\n\nEntry Successful!\n");
     printf("Please pay $20.\n");
     no_of_private_car_taxi++;
-    amount = amount + 20;
+    amount += 20;
     count++;
 }
 
-// function for bus
+// Function to handle the entry of buses.
+// Increments the count and adds $50 to the total revenue.
 void bus()
 {
     printf("\n\nEntry Successful!\n");
     printf("Please pay $50.\n");
     no_of_bus++;
-    amount = amount + 50;
+    amount += 50;
     count++;
 }
 
-// function for CNG.
+// Function to handle the entry of CNGs.
+// Increments the count and adds $10 to the total revenue.
 void cng()
 {
     printf("\n\nEntry Successful!\n");
     printf("Please pay $10.\n");
     no_of_cng++;
-    amount = amount + 10;
+    amount += 10;
     count++;
 }
 
-// function for bike.
+// Function to handle the entry of bikes.
+// Increments the count and adds $5 to the total revenue.
 void bike()
 {
     printf("\n\nEntry Successful!\n");
     printf("Please pay $5.\n");
     no_of_bike++;
-    amount = amount + 5;
+    amount += 5;
     count++;
 }
 
 int main()
 {
+    // Welcome message displayed at the start of the program.
+    printf("................Welcome To U. R. Parking Center...........\n");
 
-    //welcome screen message.
-    printf("................Welcome To Ayash Car Parking Center...........\n\n\n");
-
-    // will show option menu to the user.
-    // call the function according to the user's choice.
+    // Main program loop: Displays menu and executes corresponding actions.
     while (1)
     {
         switch (menu())
@@ -161,6 +163,8 @@ int main()
             printf("Invalid option!!!\n");
         }
     }
+
+    // Exit message (unreachable in the current program design).
     printf("Thanks for using our service.\n");
 
     return 0;
